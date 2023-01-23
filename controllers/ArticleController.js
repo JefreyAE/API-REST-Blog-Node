@@ -14,7 +14,8 @@ const ArticleController = {
         }catch(err){
             return res.status(400).json({
                 status: "error",
-                message: "An error occurred in validation"
+                message: "An error occurred in validation",
+                request: JSON.stringify(req.body)
             });
         } 
 
@@ -28,7 +29,7 @@ const ArticleController = {
             }
             return res.status(200).json({
                 status: 200,
-                message: "success",
+                message: "Article created",
                 article: savedArticle
             });
         })     
@@ -85,8 +86,6 @@ const ArticleController = {
     delete: (req, res) => {
 
         let id = req.params.id;
-       
-        validateId(id);
 
         Article.findOneAndDelete({_id: id}, (err, article) => {
             if(err || !article){
@@ -137,7 +136,7 @@ const ArticleController = {
         if(!req.file && !req.files){
             return res.status(404).json({
                 status: "error",
-                message: "Invalid request"
+                message: "Invalid request",
             });
         }
 

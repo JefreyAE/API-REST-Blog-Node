@@ -13,9 +13,8 @@ const port = 3900;
 app.use(cors()); //Config CORS
 
 //Transform body to JS object
-// app.use(express.json()); // For content-type: app/json
+app.use(express.json()); // For content-type: app/json
 app.use(express.urlencoded({extended: true}));
-
 
 //Routes
 const articles_routes = require("./routes/article_routes");
